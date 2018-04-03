@@ -1,0 +1,29 @@
+div {
+  background-color: #99eeff;
+}
+
+.inner-container-1 {
+  background-color: #ddffdd;
+}
+
+h3 {
+  text-decoration: underline;
+}
+
+ul {
+  display: inline-block;
+  width: 20%;
+  height: 40%;
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+li {
+  display: table;
+  text-align: left;
+  text-transform: lowercase;
+  font-weight: 400;
+  line-height: 1.3em;
+  border: none;
+}
