@@ -34,7 +34,7 @@
     foreach ($animalsByContinent as $continent => $animals) {
         foreach ($animals as $key => $animal) {
             $currentName = explode(' ', $animal);
-            if (sizeof($currentName) == 2) {
+            if (count($currentName) == 2) {
                 //составляем новый массив животных с названиями из 2-х слов
                 $animalNames[] = array(
                     'first_word' => $currentName[0],
@@ -47,9 +47,18 @@
     unset($currentName);
     $secondWords = array_column($animalNames, 'second_word');//создаем отдельный массив для вторых слов названий
     shuffle($secondWords);//перемешиваем вторые слова названий в массиве
-    for ($i = 0; $i < sizeof($animalNames); $i++) {
-        $newNames[] = implode(" ", array($animalNames[$i]["first_word"], $secondWords[$i], $animalNames[$i]['cont']));
+    $listOfAnimals = [];
+    $i = 0;
+    while ($i < count($animalNames)) {
+        $continent = $animalNames[$i]['cont'];
+        while ($animalNames[$i]['cont'] === $continent) {
+            $newNames[] = implode(" ", array($animalNames[$i]["first_word"], $secondWords[$i]));
+            $i++;
+        }
+        $listOfAnimals[] = "<h2>".$continent."</h2><br>".implode(", ", $newNames);
+        unset($newNames);
     }
+    $finalListOfAnimals = implode("", $listOfAnimals);
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,9 +71,8 @@
         <div class="inner-container">
         <?php
             //вывод на экран
-            echo "<h1>Fantastic Animals</h1>";
-            $listOfAnimals = str_replace(",", ", ", implode(",", $newNames));
-            echo "<p>"; echo $listOfAnimals; echo "</p>";
+            echo "<h1>Fantastic Animals</h1><br>";
+            echo $finalListOfAnimals;
         ?>
         </div>
     </body>
