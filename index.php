@@ -41,17 +41,19 @@
                     'second_word' => $currentName[1],
                     'cont' => $continent
                 );
+                $secondWords[]= $currentName[1];//создаем отдельный массив для вторых слов названий
             }
         }
     }
     unset($currentName);
-    $secondWords = array_column($animalNames, 'second_word');//создаем отдельный массив для вторых слов названий
     shuffle($secondWords);//перемешиваем вторые слова названий в массиве
     $listOfAnimals = [];
     $i = 0;
-    while ($i < count($animalNames)) {
+    $c = count($animalNames);
+    while ($i < $c) {
+        $j = $i;
         $continent = $animalNames[$i]['cont'];
-        while ($animalNames[$i]['cont'] === $continent) {
+        while (($i < $c) && ($animalNames[$i]['cont'] === $continent)) {
             $newNames[] = implode(" ", array($animalNames[$i]["first_word"], $secondWords[$i]));
             $i++;
         }
